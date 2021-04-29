@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const swaggerUi = require('swagger-ui-express')
 const cors = require('cors')
+const mon = require('mongoose')
 
 // routes
 const auth = require('routes/auth')

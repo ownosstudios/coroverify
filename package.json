@@ -11,6 +11,9 @@
     "type": "git",
     "url": "git+https://github.com/ownosstudios/coroverify.git"
   },
+  "engines": {
+    "node": "14.15.1"
+  },
   "author": "Ownos Studios",
   "license": "ISC",
   "bugs": {
