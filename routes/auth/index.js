@@ -1,10 +1,8 @@
 const express = require('express')
 const router = express.Router()
+const {authPost, getAuth} = require('controller/auth')
 
-router.get('/', (req, res) => {
-    // console.log(req)
-    // console.log(res)
-    res.send('hello')
-})
+router.get('/:token', getAuth)
+router.post('/', authPost)
 
 module.exports = router
