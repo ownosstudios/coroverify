@@ -1,0 +1,30 @@
+openapi: "3.0.2"
+info:
+  title: Dummy API
+  version: "1.0"
+
+paths:
+  /dummy/basic:
+    post:
+      summary: Post 
+      description: Update Basic Details
+      tags:
+        - Dummy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - firstName
+                - lastName
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                mobile:
+                  type: string
+      responses:
+        "200":
+          description: Updated successfully
