@@ -9,7 +9,103 @@ paths:
       summary: Post 
       description: Update Basic Details
       tags:
-        - Dummy
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - firstName
+                - lastName
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                mobile:
+                  type: string
+      responses:
+        "200":
+          description: Updated successfully
+
+    get:
+      summary: Get 
+      description: Get Basic Details
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - firstName
+                - lastName
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                mobile:
+                  type: string
+      responses:
+        "200":
+          description: Updated successfully
+
+    put:
+      summary: Put karde idhar 
+      description: Get Basic Details
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - firstName
+                - lastName
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                mobile:
+                  type: string
+      responses:
+        "200":
+          description: Updated successfully
+      
+    delete:
+      summary: Udha de isse
+      description: Get Basic Details
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - firstName
+                - lastName
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                mobile:
+                  type: string
+      responses:
+        "200":
+          description: Updated successfully
+    
+    patch:
+      summary: Udha de isse
+      description: Get Basic Details
+      tags:
+        - Auth
       requestBody:
         required: true
         content:

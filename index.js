@@ -1,4 +1,5 @@
 // dependencies
+require('dotenv').config()
 const express = require('express')
 const app = express()
 // const path = require('path')
@@ -6,7 +7,8 @@ const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const swaggerUi = require('swagger-ui-express')
 const cors = require('cors')
-const mon = require('mongoose')
+const firebaseAdmin = require("lib/firebase");
+// const mon = require('mongoose')
 
 // routes
 const auth = require('routes/auth')
@@ -18,6 +20,7 @@ const corsConfig = {
 	origin: true,
 	credentials: true
 }
+
 
 app.use(bodyParser.urlencoded({
 	extended: true
