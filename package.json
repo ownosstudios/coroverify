@@ -15,7 +15,7 @@
     "node": "14.15.1"
   },
   "author": "Ownos Studios",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/ownosstudios/coroverify/issues"
   },
@@ -30,6 +30,7 @@
     "express": "^4.17.1",
     "firebase-admin": "^9.6.0",
     "lib": "file:lib",
+    "models": "file:models",
     "mongoose": "^5.12.5",
     "public": "file:public",
     "routes": "file:routes",
