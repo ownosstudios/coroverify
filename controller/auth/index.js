@@ -28,16 +28,19 @@ const authPost = (req, res) => {
     })
 }
 
-const getAuth = async (req, res, next) => {
-    const token = req.cookies
-    console.log(token)
-    // try {
-    //     const user = await UserToken.find({token: token})
-    //     res.status(200).json(user)
-    //     next()
-    // } catch (e) {
-    //     res.status(404).json({...e})
-    // }
+const authMiddleware = async (req, res, next) => {
+    const cookies = req.cookies
+    try {
+        const user = await UserToken.findOne({token: cookies.token})
+        // res.status(200).json(user)
+        if (user) {
+            next()
+        } else {
+            throw Error()
+        }
+    } catch (e) {
+        res.status(404).json({message: 'No user found'})
+    }
 }
 
 const delAuth = async (req, res) => {
@@ -48,4 +51,33 @@ const updateAuth = (req, res) => {
 
 }
 
-module.exports = {authPost, getAuth, delAuth, updateAuth}
+const getAuth = (req, res) => {
+    console.log(req)
+    res.status(200).json({message: 'good shizz'})
+}
+
+const login = async (req, res) => {
+    try {
+        const user = await UserToken.findOne({_id: req.body.email})
+        if (user) {
+            res.status(200).json({message: 'Found user', ...user})
+        }
+    } catch (e) {
+        res.status(404).json({message: 'No user found', status: 404})
+    }
+}
+
+const logout = async (req, res) => {
+    try {
+        if (req.cookies.token) {
+            await res.clearCookie('token')
+            res.status(200).json({message: 'Successfully logged out.'})
+        } else {
+            throw Error()
+        }
+    } catch (e) {
+        res.status(500).json({message: 'No user found.'})
+    }
+}
+
+module.exports = {authPost, authMiddleware, delAuth, updateAuth, login, getAuth, logout}
