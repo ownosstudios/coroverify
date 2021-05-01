@@ -7,7 +7,7 @@ paths:
   /dummy/basic:
     post:
       summary: Post 
-      description: Update Basic Details
+      description: Login
       tags:
         - Auth
       requestBody:
@@ -16,22 +16,22 @@ paths:
           application/json:
             schema:
               required:
-                - firstName
-                - lastName
+                - email
+                - password
               properties:
-                firstName:
+                email:
                   type: string
-                lastName:
+                password:
                   type: string
                 mobile:
                   type: string
       responses:
         "200":
-          description: Updated successfully
+          description: Logged in successfully
 
     get:
       summary: Get 
-      description: Get Basic Details
+      description: Logout
       tags:
         - Auth
       requestBody:
@@ -51,11 +51,11 @@ paths:
                   type: string
       responses:
         "200":
-          description: Updated successfully
+          description: Logged out successfully
 
-    put:
-      summary: Put karde idhar 
-      description: Get Basic Details
+    post:
+      summary: authPost 
+      description: Post Basic Auth Details
       tags:
         - Auth
       requestBody:
@@ -77,9 +77,9 @@ paths:
         "200":
           description: Updated successfully
       
-    delete:
-      summary: Udha de isse
-      description: Get Basic Details
+    get:
+      summary: getAuth
+      description: Get Basic Auth Details
       tags:
         - Auth
       requestBody:
@@ -102,7 +102,7 @@ paths:
           description: Updated successfully
     
     patch:
-      summary: Udha de isse
+      summary: Udha de isse (retained)
       description: Get Basic Details
       tags:
         - Auth
