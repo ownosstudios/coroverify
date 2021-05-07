@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser')
 const swaggerUi = require('swagger-ui-express')
 const cors = require('cors')
 // const firebaseAdmin = require("lib/firebase");
-const mongoose = require('./db/mongoose')
+// const mongoose = require('./db/mongoose')
 // routes
 const auth = require('routes/auth')
 
