@@ -2,19 +2,25 @@ const firebaseAdmin = require('lib/firebase')
 
 const setClaims = (res, uid, claims, cookieOptions) => {
     firebaseAdmin.auth().setCustomUserClaims(uid, claims)
-    .then((customToken) => {
-        res.cookie('token', customToken, cookieOptions)
-        res.status(200).json({message: 'Registration successful', status: 200})
-    })
-    .catch((err) => {
-        // console.log(err)
-        res.status(500).json({...err})
-    })
+        .then((customToken) => {
+            res.cookie('token', customToken, cookieOptions)
+            res.status(200).json({
+                message: 'Registration successful',
+                status: 200
+            })
+        })
+        .catch((err) => {
+            res.status(500).json({
+                ...err
+            })
+        })
 }
 
 const newSignup = (req, res) => {
     const uid = req.body.token
-    const claims = {userType: req.body.claims}
+    const claims = {
+        userType: req.body.claims
+    }
     const cookieOptions = {
         maxAge: Date.now(),
         httpOnly: true,
@@ -29,12 +35,15 @@ const authMiddleware = async (req, res, next) => {
     .then((value) => {
         if (value) {
             console.log(value)
+            next()
         }
     })
     .catch((err) => {
+        console.log(err)
         if (err) {
-            console.log(err)
-            res.status(404).json({message: 'No user found'})
+            res.status(404).json({
+                message: 'No user found'
+            })
         }
     })
 }
@@ -49,35 +58,51 @@ const updateAuth = (req, res) => {
 
 const getAuth = (req, res) => {
     // console.log(req)
-    res.status(200).json({message: 'good shizz'})
+    res.status(200).json({
+        message: 'good shizz'
+    })
 }
 
-const login = async (req, res) => {
-    if (req.cookies.token) {
-        res.status(400).json({message: 'Already logged in', status: 400})
-    }
-    try {
-        const user = await UserToken.findOne({_id: req.body.email})
-        if (user) {
-            res.cookie('token', user.token)
-            res.status(200).json({message: 'Found user', status: 200, token: user.token})
-        }
-    } catch (e) {
-        res.status(404).json({message: 'No user found', status: 404})
-    }
+const login = (req, res) => {
+    
 }
 
 const logout = (req, res) => {
     try {
         if (req.cookies.token) {
             res.clearCookie('token')
-            res.status(200).json({message: 'Successfully logged out.'})
+            res.status(200).json({
+                message: 'Successfully logged out.'
+            })
         } else {
             throw Error()
         }
     } catch (e) {
-        res.status(404).json({message: 'No user found.'})
+        res.status(404).json({
+            message: 'No user found.'
+        })
     }
 }
 
-module.exports = {newSignup, authMiddleware, delAuth, updateAuth, login, getAuth, logout}
+const deleteUser = (req, res) => {
+    const uid = req.body.uid
+    firebaseAdmin.auth().deleteUser(uid)
+    .then(() => {
+        console.log('Successfully deleted user');
+        res.status(200).json({message: 'User successfully deleted'})
+    })
+    .catch((error) => {
+        console.log('Error deleting user:', error);
+    })
+}
+
+module.exports = {
+    newSignup,
+    authMiddleware,
+    delAuth,
+    updateAuth,
+    login,
+    getAuth,
+    logout,
+    deleteUser
+}
